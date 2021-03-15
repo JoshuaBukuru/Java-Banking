@@ -3,6 +3,10 @@ import ATM.SavingsAccount;
 import java.util.*;
 public class main {
 
+
+
+
+
     public static void main(String[] args) {
 
         //Five savings accounts
@@ -34,7 +38,91 @@ public class main {
         checkingAccounts.add(checkingAccount_5);
 
 
+        checkAccountMenu(checkingAccounts);
 
+
+
+
+    }
+
+    public static void checkAccountMenu(List<CheckingAccount> checkingAccounts){
+        //Menu for check accounts
+        boolean run = true;                       //For eternal loop
+        boolean foundId = false;                    //Tracks ID in stream of ID's
+
+        Scanner sc = new Scanner(System.in);       //To read input
+        while (run) {
+            System.out.print("Enter your ID: ");
+            int id = sc.nextInt();
+
+            for(CheckingAccount checkingAccount : checkingAccounts){
+                if(id == checkingAccount.getId()) {
+                    foundId = true;
+                    break;
+                } else {
+                    foundId = false;
+                }
+            }
+            if( foundId ) {
+                //Main menu
+
+                CheckingAccount checkingAccount = null;
+                for(CheckingAccount checkingAccountt : checkingAccounts) {
+                    if (checkingAccountt.getId() == id) {
+                         checkingAccount = checkingAccountt;
+                         break;
+                    }
+                }
+
+                System.out.println("Main menu");
+                System.out.println("1. check the balance");
+                System.out.println("2. withdraw");
+                System.out.println("3. deposit");
+                System.out.println("4. exit\n");
+                int menuPicker = sc.nextInt();
+
+                if(menuPicker == 1) {
+                    System.out.println("Your balance is: "+checkingAccount.getBalance());
+                } else if(menuPicker == 2) {
+                    System.out.println("Enter the amount for withdrawal:");
+                    double withdrawal = sc.nextDouble();
+                    if(checkingAccount.getBalance() >= withdrawal){
+                        double amountLeft = checkingAccount.getBalance() - withdrawal;
+                        checkingAccount.setBalance(amountLeft);
+                    } else {
+                        System.out.println("You have insufficient funds!");
+                        continue;
+                    }
+
+                    System.out.println("Your requested withdrawal amount is: R" + withdrawal);
+
+                }else if(menuPicker == 3) {
+                    System.out.println("Enter the amount for deposit:");
+                    double deposit = sc.nextDouble();
+                    double balanceIncrease = checkingAccount.getBalance() + deposit;
+                    checkingAccount.setBalance(balanceIncrease);
+                    System.out.println("You've deposited R" + deposit);
+
+                } else if(menuPicker == 4) {
+                    continue;
+
+                } else {
+                    System.out.println("Enter a valid item number!");
+                    continue;
+                }
+
+
+            } else {
+                System.out.println("Please enter a valid ID");
+                continue;
+            }
+        }
+
+
+    }
+
+    public static void savingAccountMenu(List<SavingsAccount> savingAccounts){
+        //Menu for saving accounts
         boolean run = true;                       //For eternal loop
         boolean foundId = false;                    //Tracks ID in stream of ID's
 
@@ -70,7 +158,7 @@ public class main {
                 } else if(menuPicker == 2) {
                     System.out.println("Enter the amount for withdrawal:");
                     double withdrawal = sc.nextDouble();
-                    if(savingAccount.getBalance() > withdrawal){
+                    if(savingAccount.getBalance() >= withdrawal){
                         double amountLeft = savingAccount.getBalance() - withdrawal;
                         savingAccount.setBalance(amountLeft);
                     } else {
@@ -100,15 +188,9 @@ public class main {
                 System.out.println("Please enter a valid ID");
                 continue;
             }
-
-
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
         }
 
 
     }
-
-
 }
 
