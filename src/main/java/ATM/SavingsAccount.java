@@ -1,11 +1,11 @@
 package ATM;
-
+import java.util.Date;
 public class SavingsAccount extends Accounts {
     //A class that produces the savings account details
     private double annualInterestRate;
 
-    public SavingsAccount(int id, double balance, double annualInterestRate) {
-        super(id, balance);
+    public SavingsAccount(int id, Date dateCreated, double balance, double annualInterestRate) {
+        super(id, dateCreated, balance);
         this.annualInterestRate = annualInterestRate;
     }
 

@@ -1,14 +1,17 @@
 package ATM;
-
 import java.util.Date;
+import java.text.SimpleDateFormat;
+
 public class Accounts {
     private int id;
     private double balance;
     private Date dateCreated;
 
-    public Accounts(int id, double balance) {
+    public Accounts(int id, Date dateCreated, double balance) {
         this.id = id;
+        this.dateCreated = dateCreated;
         this.balance = balance;
+
     }
     public double withdraw(double amount) {
         return amount;
