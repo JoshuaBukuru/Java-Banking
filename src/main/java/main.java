@@ -68,10 +68,10 @@ public class main {
 
     public static void checkAccountMenu(List<CheckingAccount> checkingAccounts){
         //Menu for check accounts
-        boolean run = true;                       //For eternal loop
+        boolean run = true;                         //For eternal loop
         boolean foundId = false;                    //Tracks ID in stream of ID's
 
-        Scanner sc = new Scanner(System.in);       //To read input
+        Scanner sc = new Scanner(System.in);        //To read input
         while (run) {
             System.out.print("Enter your ID: ");
             int id = sc.nextInt();
@@ -99,7 +99,7 @@ public class main {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 System.out.println("Check account ID: "+ checkingAccount.getId());
                 System.out.println("Date created: "+ sdf.format(checkingAccount.getDateCreated()));
-                System.out.println("Balance: R"+ checkingAccount.getBalance());
+                //System.out.println("Balance: R"+ checkingAccount.getBalance());
                 System.out.println("------------------------------");
                 System.out.println("Main menu");
                 System.out.println("1. check the balance");
@@ -153,10 +153,10 @@ public class main {
 
     public static void savingAccountMenu(List<SavingsAccount> savingAccounts, String date){
         //Menu for saving accounts
-        boolean run = true;                       //For eternal loop
+        boolean run = true;                         //For eternal loop
         boolean foundId = false;                    //Tracks ID in stream of ID's
 
-        Scanner sc= new Scanner(System.in);       //To read input
+        Scanner sc= new Scanner(System.in);         //To read input
 
         while (run) {
             System.out.print("Enter your ID: ");
@@ -180,6 +180,7 @@ public class main {
                         break;
                     }
                 }
+                //To calculate the interest rate given the current date
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 String[] dateArray = date.split("-");
                 List <String> dateNow = Arrays.asList(dateArray);
@@ -187,8 +188,8 @@ public class main {
                 String[] dateArray_2 = dateCreated.split("-");
                 List <String> dateCreatedList = Arrays.asList(dateArray_2);
 
-                int yearNow = Integer.parseInt(dateCreatedList.get(2));
-                int monthNow = Integer.parseInt(dateCreatedList.get(1));
+                int yearNow = Integer.parseInt(dateNow.get(2));
+                int monthNow = Integer.parseInt(dateNow.get(1));
                 int yearCreated = Integer.parseInt(dateCreatedList.get(2));
                 int monthCreated = Integer.parseInt(dateCreatedList.get(1));
 
@@ -198,7 +199,7 @@ public class main {
                 if(yearNow > yearCreated){
                     monthDiff = (((yearNow * 12) + monthNow) - ((yearCreated * 12) + monthCreated));
 
-                }else if(yearNow == yearCreated) {
+                }else if((yearNow == yearCreated) && (monthNow > monthCreated)) {
                     monthDiff = monthNow - monthCreated;
                 } else{
                     interestRate = savingsAccount.getBalance();
@@ -210,7 +211,7 @@ public class main {
 
                 System.out.println("Check account ID: "+ savingsAccount.getId());
                 System.out.println("Date created: "+ sdf.format(savingsAccount.getDateCreated()));
-                System.out.println("Balance: R"+ savingsAccount.getBalance());
+                //System.out.println("Balance: R"+ savingsAccount.getBalance());
                 System.out.println("------------------------------");
                 System.out.println("Main menu");
                 System.out.println("1. check the balance");
